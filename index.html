@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>automatic-slider</title>
+    <style>
+	@-webkit-keyframes f1 {
+		0% { opacity: 0; }
+		100% { opacity: 1; }
+	}
+	@keyframes f1 {
+		0% { opacity: 0; }
+		100% { opacity: 1; }
+	}
+	
+
+
+    #container {
+        width: 300px;
+        height: 250px;
+        position: relative;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+        border: 1px solid #333;
+    }
+
+    .f1 {
+        width: 300px;
+        height: 250px;
+        top: 0;
+        left: 0;
+        position: absolute;
+        background: url(sprite.jpg);
+        background-position: 0 0;
+        -webkit-animation: f1 1s ease 0s 1 normal forwards;
+        animation: f1 1s ease 0s 1 normal forwards;
+    }
+
+    
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        
+    </div>
+    <script>
+    var counter = 1;
+    var f1 = document.createElement("div");
+    f1.setAttribute("id", "f1");
+    f1.setAttribute("class", "f1");
+    var container = document.getElementById("container");
+    container.appendChild(f1);
+
+
+
+    var counterFn = setInterval(function() {
+        function createf() {
+            counter++;
+            var changePos = 300 * counter;
+            var fcreate = document.createElement("div");
+            fcreate.setAttribute("class", "f" + counter);
+            fcreate.style.backgroundImage = "url('sprite.jpg')";
+            fcreate.style.top = "0px";
+            fcreate.style.left = "0px";
+            fcreate.style.position = "absolute";
+            fcreate.style.width = "300px";
+            fcreate.style.height = "250px";
+            fcreate.style.backgroundPosition = -changePos + "px" + " " + 0 + "px";
+            fcreate.style.backgroundRepeat = "no-repeat";
+            fcreate.style.opacity = "0";
+            fcreate.style.transition = "opacity 1s";
+            setTimeout(function() {
+                fcreate.style.opacity = "1";
+            }, 200);
+            container.appendChild(fcreate);
+            console.log(counter);
+            if (counter >= 16) {
+                clearInterval(counterFn);
+            }
+        }
+        createf();
+
+
+    }, 450);
+    </script>
+</body>
+
+</html>
